@@ -15,4 +15,5 @@ Flask-Cors
 dill
 imblearn
 xgboost
+streamlit
 -e . 

@@ -24,8 +24,8 @@ class DataTransfomation:
 
         
         numeric_transformer = StandardScaler()
-        oh_transformer = OneHotEncoder(dtype=float)
-        ordinal_encoder = OrdinalEncoder(dtype=float)
+        oh_transformer = OneHotEncoder()
+        ordinal_encoder = OrdinalEncoder()
 
         preprocessor = ColumnTransformer(
             [
