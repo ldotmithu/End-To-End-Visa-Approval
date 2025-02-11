@@ -7,7 +7,7 @@ from mlproject.pipeline.prediction_pipeline import prediction_pipeline
 
 
 preprocess = joblib.load(Path("atrifacts\data_transfomation\preprocess.pkl")) 
-model = joblib.load(Path("atrifacts\model_train\model.pkl"))
+#model = joblib.load(Path("atrifacts\model_train\model.pkl"))
 
 st.title("Visa Approval Prediction")
 

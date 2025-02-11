@@ -1,21 +1,21 @@
-#pandas 
-#mlflow==2.2.2
-#notebook
-#numpy
-#scikit-learn
-#matplotlib
-##python-box==6.0.2
-#pyYAML
-#tqdm
-#ensure==1.0.2
-#joblib
-#types-PyYAML
-#Flask
-#Flask-Cors
-#dill
-#imblearn
-#xgboost
-#streamlit
+pandas 
+mlflow==2.2.2
+notebook
+numpy
+scikit-learn
+matplotlib
+python-box==6.0.2
+pyYAML
+tqdm
+ensure==1.0.2
+joblib
+types-PyYAML
+Flask
+Flask-Cors
+dill
+imblearn
+xgboost
+streamlit
 streamlit
 plotly
 pytz
@@ -23,4 +23,4 @@ joblib
 pandas
 numpy
 pathlib
-#-e . 
+-e . 

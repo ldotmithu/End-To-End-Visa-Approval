@@ -35,14 +35,14 @@ class ModelEvaluation:
             predictions = model.predict(X_test)
             accuracy = accuracy_score(y_test, predictions)
 
-            # Log parameters & metrics
+            
             mlflow.log_params(self.params)
             mlflow.log_metric("accuracy", accuracy)
 
-            # Check MLflow tracking type
+            
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-            # Log the model
+            
             if tracking_url_type_store != "file":
                 mlflow.sklearn.log_model(model, "model", registered_model_name="RandomForestClassifier")
             else:
