@@ -1,51 +1,53 @@
 from mlproject.config.config_entity import ModelEvaluationConfig
 from mlproject import logging
 import pandas as pd 
-import joblib,os
-from mlproject.utility.common import *
+import joblib
+import os
+import mlflow
+import mlflow.sklearn
+import numpy as np
+from mlproject.utility.common import Read_yaml, Create_Folder, save_object
 from sklearn.metrics import accuracy_score
-import numpy as np 
-from imblearn.combine import SMOTEENN
-
-
-
+from urllib.parse import urlparse
 
 class ModelEvaluation:
     def __init__(self):
         self.model_evaluation = ModelEvaluationConfig()
-        self.params = Read_yaml(self.model_train.params_path)['model']
+        self.params = Read_yaml(self.model_evaluation.params_path)['model']
+        
         
         Create_Folder(self.model_evaluation.root_dir)
-    
-    def evaluation_on_testdata(self):
-        test_data = np.load(self.model_evaluation.test_data_path)
         
-        
-        X_test = test_data[:, :-1] 
-        y_test = test_data[:, -1]
-        mlflow.set_registry_uri(self.model_evaluation.mlflow_uri)
-        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-        
-        
-        model = joblib.load(self.model_evaluation.model_path)
-        with mlflow.start_run():
-            prd = model.predict(X_test)
-            accuracy = accuracy_score(y_test,prd)
-            mlflow.log_params(self.self.params)
-            mlflow.log_metric("accuracy", accuracy)
-            # Model registry does not work with file store
-            if tracking_url_type_store != "file":
+       
+        mlflow.set_tracking_uri("http://127.0.0.1:8080")
+        mlflow.set_experiment("new_visa_approval_experiment")
 
-                # Register the model
-                # There are other ways to use the Model Registry, which depends on the use case,
-                # please refer to the doc for more information:
-                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
+    def evaluation_on_testdata(self):
+        
+        test_data = np.load(self.model_evaluation.test_data_path)
+        X_test, y_test = test_data[:, :-1], test_data[:, -1]
+
+       
+        model = joblib.load(self.model_evaluation.model_path)
+
+        
+        with mlflow.start_run():
+            predictions = model.predict(X_test)
+            accuracy = accuracy_score(y_test, predictions)
+
+            # Log parameters & metrics
+            mlflow.log_params(self.params)
+            mlflow.log_metric("accuracy", accuracy)
+
+            # Check MLflow tracking type
+            tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+
+            # Log the model
+            if tracking_url_type_store != "file":
                 mlflow.sklearn.log_model(model, "model", registered_model_name="RandomForestClassifier")
             else:
                 mlflow.sklearn.log_model(model, "model")
 
-        save_object(accuracy,os.path.join(self.model_evaluation.root_dir,self.model_evaluation.metrics_path))
-        logging.info(f"accuracy: {accuracy}")
-
-        
-        
+        # Save accuracy locally
+        save_object(accuracy, os.path.join(self.model_evaluation.root_dir, self.model_evaluation.metrics_path))
+        logging.info(f"Model Accuracy: {accuracy}")
