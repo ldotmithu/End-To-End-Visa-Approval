@@ -75,6 +75,7 @@ class DataTransfomation:
                     
                     preprocess_path = os.path.join(self.data_transfomation.root_dir, self.data_transfomation.preprocess_name)
                     joblib.dump(preprocess, preprocess_path)
+                    logging.info('Preprocess saved successfully')
                     
                     logging.info('Data loaded and split into 80% train and 20% test successfully.')
                 else:

@@ -25,23 +25,15 @@ class ModelTrain:
             
             X_train = train_data[:, :-1] 
             y_train = train_data[:, -1] 
-            
-            #target_col = self.schema['TARGET_COLUMN']
-            #train_X = train_data.drop(columns=[target_col], axis=1)
-            #train_y = train_data[target_col]
-            #y_train= np.where(y_train =='Denied', 1,0)
 
             n_estimators = self.params['n_estimators']
             max_features = self.params['max_features']
+            max_depth = self.params['max_depth']
             
 
             rf = RandomForestClassifier(
                 n_estimators=n_estimators,
-                max_features=max_features,
-                max_depth=None,
-                min_samples_leaf=2,
-                min_samples_split=5,
-                random_state=42
+               max_features=max_features
             )
             #rf = KNeighborsClassifier(weights= 'distance', n_neighbors= 4, algorithm= 'auto')
             rf.fit(X_train, y_train)
@@ -53,9 +45,6 @@ class ModelTrain:
 
             joblib.dump(rf, model_path)
             logging.info('Train Model saved successfully')
-
-            #joblib.dump(preprocess_obj, preprocess_path)
-            logging.info('Preprocess saved successfully')
             logging.info(rf.score(X_train,y_train))
 
         except Exception as e:
