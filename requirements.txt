@@ -19,4 +19,8 @@
 streamlit
 plotly
 pytz
+joblib
+pandas
+numpy
+pathlib
 #-e . 
