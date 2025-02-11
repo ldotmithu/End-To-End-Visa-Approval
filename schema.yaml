@@ -1,1 +1,17 @@
-key : value
+COLUMNS:
+  case_id : object
+  continent : object
+  education_of_employee : object
+  has_job_experience : object
+  requires_job_training : object
+  no_of_employees : int64  
+  yr_of_estab : int64  
+  region_of_employment : object
+  prevailing_wage : float64
+  unit_of_wage : object
+  full_time_position : object
+  case_status : object
+  
+
+TARGET_COLUMN:
+  name : case_status

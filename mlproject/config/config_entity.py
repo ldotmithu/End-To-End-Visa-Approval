@@ -9,3 +9,10 @@ class DataIngestionConfig:
     local_data_path:Path="atrifacts/data_ingestion/data.zip"
     unzip_dir:Path= 'atrifacts/data_ingestion'
     
+@dataclass
+class DataValidationConfig:
+    root_dir: Path = 'atrifacts/data_validation'
+    unzip_dir_path: Path = "atrifacts/data_ingestion/Visadataset.csv"
+    status_file: Path = 'atrifacts/data_validation/status.txt'
+    schema_path: dict = 'schema.yaml'
+    

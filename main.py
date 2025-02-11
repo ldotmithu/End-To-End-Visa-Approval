@@ -1,4 +1,4 @@
-from mlproject.pipeline.Pipeline_statges import DataIngestionPipeline
+from mlproject.pipeline.Pipeline_statges import DataIngestionPipeline,DataValidationPipeline
 from mlproject import logging
 
 try:
@@ -9,3 +9,12 @@ try:
     
 except Exception as e:
     raise e    
+
+try:
+    logging.info('>>>>Data Validation>>>>>>')
+    data_validation = DataValidationPipeline()
+    data_validation.Main()
+    logging.info('--------------------------')
+    
+except Exception as e:
+    raise e   
