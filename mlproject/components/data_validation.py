@@ -2,6 +2,7 @@ from mlproject.config.config_entity import DataValidationConfig
 from mlproject import logging
 from mlproject.utility.common import Create_Folder,Read_yaml
 import pandas as pd 
+from sklearn.model_selection import train_test_split
 
 
 class DataValidation:
@@ -29,7 +30,8 @@ class DataValidation:
                 validation_status = True
                 logging.info(f'Validation Status : {validation_status}')
                 with open (self.data_validation.status_file,'w') as f:
-                    f.write(f'Validation Status : {validation_status}')        
+                    f.write(f'Validation Status : {validation_status}')      
+                
                  
             return validation_status        
         except Exception as e:

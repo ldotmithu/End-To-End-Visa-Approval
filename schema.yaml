@@ -14,4 +14,11 @@ COLUMNS:
   
 
 TARGET_COLUMN:
-  name : case_status
+  case_status
+
+drop_columns:
+  case_id
+  no_of_employees
+  yr_of_estab
+
+

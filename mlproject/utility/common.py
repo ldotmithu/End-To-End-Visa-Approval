@@ -1,6 +1,7 @@
 from mlproject import logging
 import os 
 import yaml
+import json
 
 def Create_Folder(file_path):
     try:
@@ -16,13 +17,19 @@ import logging
 def Read_yaml(file_path):
     try:
         with open(file_path, 'r') as f:
-            # Load the YAML content into a Python dictionary
-            yaml_content = yaml.safe_load(f)  # Return YAML content as a dictionary
+            yaml_content = yaml.safe_load(f)  
         logging.info('YAML file loaded successfully')
         return yaml_content
     except FileNotFoundError:
         logging.error('YAML file not found')
+        
+def save_object(obj,file_path):
+    try:
+        with open(file_path,'w') as f:
+            json.dump(f"accuracy :{obj}",f,indent=4)
+            logging.info(f'Save the accuracy on {file_path}')
     except Exception as e:
-        logging.error(f"An error occurred while loading the YAML file: {e}")
+        raise e        
+            
   
             

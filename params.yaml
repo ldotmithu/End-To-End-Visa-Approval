@@ -1,0 +1,4 @@
+model:
+  n_estimators: 200
+  max_features: log2
+  max_depth: None
