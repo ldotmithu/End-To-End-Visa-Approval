@@ -41,6 +41,8 @@ class ModelEvaluationConfig:
     preprocess_path:Path ="atrifacts\data_transfomation\preprocess.pkl"
     metrics_path:str = "metrics.json"
     schema_path: dict = 'schema.yaml'
+    params_path : dict = "params.yaml"
+    mlflow_uri:str="https://dagshub.com/ldotmithu/End-To-End-Visa-Approval.mlflow"
     
     
     
