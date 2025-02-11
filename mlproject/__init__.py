@@ -20,3 +20,4 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger("mlProjectLogger")
+
