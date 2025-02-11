@@ -16,3 +16,12 @@ class DataValidationConfig:
     status_file: Path = 'atrifacts/data_validation/status.txt'
     schema_path: dict = 'schema.yaml'
     
+@dataclass
+class DataTransfomationConfig:
+    root_dir:Path = 'atrifacts/data_transfomation'
+    data_dir_path: Path = "atrifacts/data_ingestion/Visadataset.csv"
+    status_file: Path = 'atrifacts/data_validation/status.txt'
+    
+    
+    
+    

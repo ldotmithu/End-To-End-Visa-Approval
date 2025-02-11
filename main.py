@@ -1,4 +1,5 @@
-from mlproject.pipeline.Pipeline_statges import DataIngestionPipeline,DataValidationPipeline
+from mlproject.pipeline.Pipeline_statges import (DataIngestionPipeline,DataValidationPipeline,
+DataTransfomationPipeline)
 from mlproject import logging
 
 try:
@@ -18,3 +19,12 @@ try:
     
 except Exception as e:
     raise e   
+
+try:
+    logging.info('>>>>Data Transform>>>>>>')
+    data_transform = DataTransfomationPipeline()
+    data_transform.Main()
+    logging.info('--------------------------')
+    
+except Exception as e:
+    raise e  

@@ -12,27 +12,31 @@ class DataValidation:
         
     def check_all_columns(self):
         try:
-            validation_status = True  
+            #validation_status = True  
             data = pd.read_csv(self.data_validation.unzip_dir_path)
             all_columns = list(data.columns)
             required_columns = self.schema.keys()
-
-           
-            missing_columns = [col for col in required_columns if col not in all_columns]
-            if missing_columns:
-                validation_status = False  
-                logging.error(f"Missing columns: {missing_columns}")
             
+            miss_col = [col for col in required_columns if col not in all_columns]
             
-            with open(self.data_validation.status_file, 'w') as f:
-                f.write(f"Validation Status: {validation_status}\n")
-                if not validation_status:
-                    f.write(f"Missing Columns: {missing_columns}\n")
-            
-            logging.info(f"Validation result: {validation_status}")        
-            
-            return validation_status
-            
+            if miss_col:
+                validation_status = False
+                logging.info(f'Validation Status : {validation_status}')
+                logging.error(f'missing columns :{miss_col}')
+                with open (self.data_validation.status_file,'w') as f:
+                    f.write(f'Validation Status : {validation_status}')
+            else:
+                validation_status = True
+                logging.info(f'Validation Status : {validation_status}')
+                with open (self.data_validation.status_file,'w') as f:
+                    f.write(f'Validation Status : {validation_status}')        
+                 
+            return validation_status        
         except Exception as e:
-            logging.error(f"An error occurred during column validation: {e}")
-            raise e
+            raise e             
+                    
+                    
+
+if __name__=="__main__":
+    valid = DataValidation()
+    valid.check_all_columns()        
